@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<style>
+body {
+    color: black;
+    background: #2F3446;
+    padding: 0 5em;
+    margin: 0;
+    text-align: center;
+}
+
+div{
+/*    width: 320px; 
+    height: 500px; 
+    text-align: center; 
+    font-family: sans-serif; 
+    padding-top: 50px; 
+    margin: auto; 
+    margin-top: 50px; 
+    background-color: #ffffff; 
+    border-radius: 4px;*/
+    text-align: center; 
+    margin-left: auto; 
+    margin-right: auto; 
+    margin-top: 50px;
+    width: 600px; 
+    height: 300px; 
+    border-radius: 5px; 
+    border:none; 
+    background-color: #fff; 
+    color: black; 
+    font-size: 13px;
+    font-family: sans-serif;
+}
+
+#Q2 {
+    width: 200px; 
+    height: 40px; 
+    border-radius: 5px; 
+    border:none; background-color: #36A0B9; 
+    color: #ffffff; 
+    font-size: 15px;
+}
+#id1{
+    margin-top: 25px;
+    padding-top: 25px;
+}
+</style>
+
+<body onload=callAlert()>
+<div>
+    <h1 id = "id1">Login</h1>
+	<h2>"Your account is not found in the database"</h2>
+    <form method='post' enctype="multipart/form-data">
+        {% csrf_token %} {{uf.as_p}}
+        <input id = "Q2" type="submit" value="submit" />
+    </form>
+    <br>
+    <a href="http://127.0.0.1:8000/account/register/">Register now!</a>
+
+</div>
+</body>
+
+</html>

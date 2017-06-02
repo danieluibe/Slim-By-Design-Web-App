@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Data Report</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+ 
+    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.css">
+ 
+
+    {% load static %}
+</head>
+<style>
+  #try1{
+    font-size: 20px;
+    border-radius: 40px;
+    color: #ffffff;
+    border: none;
+    text-align: center;
+    margin-top: 30px;
+
+  }
+   table, th, td {
+       /*border: 1px solid black;*/
+   }
+   tr:nth-child(even) {background: #CCC}
+   tr:nth-child(odd) {background: #FFF}
+</style>
+<body style="background-color: #F3F3F4;">
+<!-- 	<img src = "img/SBD_logo.png" alt="Slim by Design logo">
+ -->    <div style="width: 920px; height: 500px; text-align: center; font-family: sans-serif; padding-top: 50px; margin: auto; border-radius: 4px;">
+            Restaurants
+            <table id = "Restaurant_Table" align ="center">
+                <tr>
+                    <th>City</th>
+                    <th>Name</th>
+                    <th>Number of Ratings</th>
+                    <th>Rating</th>
+                    <th>Type</th>
+                </tr>
+                {% for item in table %}
+                <tr>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.numRates }}</td>
+                    <td>{{ item.rating }}</td>
+                    <td>{{ item.type }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <br>
+            <br>
+            Reviews
+            <table align ="center">
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Day</th>
+                    <th>City</th>
+                    <th>Name</th>
+                    <th>Rating</th>
+                    <th>Type</th>
+                    <th>Q1</th>
+                    <th>Q2</th>
+                    <th>Q3</th>
+                    <th>Q4</th>
+                    <th>Q5</th>
+                    <th>Q6</th>
+                    <th>Q7</th>
+                    <th>Q8</th>
+                    <th>Q9</th>
+                    <th>Q10</th>
+                </tr>
+                {% for item in reviews %}
+                <tr>
+                    <td>{{ item.date }}</td>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.day }}</td>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.rating }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.answer1 }}</td>
+                    <td>{{ item.answer2 }}</td>
+                    <td>{{ item.answer3 }}</td>
+                    <td>{{ item.answer4 }}</td>
+                    <td>{{ item.answer5 }}</td>
+                    <td>{{ item.answer6 }}</td>
+                    <td>{{ item.answer7 }}</td>
+                    <td>{{ item.answer8 }}</td>
+                    <td>{{ item.answer9 }}</td>
+                    <td>{{ item.answer10 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+        </div>
+
+
+<script>
+    $(document).ready(function() {
+        $('#Restaurant_Table').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                'csvHtml5',
+            ]
+        } );
+    } );
+</script>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+
+
+
+</body>
+
+</html>

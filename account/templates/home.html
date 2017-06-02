@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Slim By Design</title>
+    {% load static %}
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet"/>
+
+    <!-- MetisMenu CSS -->
+    <link href="{% static 'vendor/metisMenu/metisMenu.min.css' %}" rel="stylesheet"/>
+
+    <!-- DataTables CSS -->
+    <link href="{% static 'vendor/datatables-plugins/dataTables.bootstrap.css' %}" rel="stylesheet"/>
+
+    <!-- DataTables Responsive CSS -->
+    <link href="{% static 'vendor/datatables-responsive/dataTables.responsive.css' %}" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link href="{% static 'dist/css/sb-admin-2.css' %}" rel="stylesheet"/>
+
+    <!-- Custom Fonts -->
+    <link href="{% static 'vendor/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet"/>
+
+    <link href="https://cdn.datatables.net/buttons/1.3.1/css/buttons.dataTables.min.css" rel="stylesheet"/>
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="../review">SlimByDesign</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav">
+               
+                <li >
+                    <a href="../review"><i class="fa fa-table fa-fw"></i> Review Data</a>
+                </li>
+
+                <li>
+                    <a href="../restaurant"><i class="fa fa-cutlery fa-fw"></i> Restaurant Data</a>
+                </li>
+
+                <li class="active">
+                    <a href="../home"><i class="fa fa-home fa-fw"></i> Home Data</a>
+                </li>
+                
+              </ul>
+              
+
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+                <li><a href="http://127.0.0.1:8000/account/login/"><i class="fa fa-sign-out fa-fw"></i> Logout</a></li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
+
+      
+
+        <div id="wrapper" style="margin-left: 15px; margin-top:-30px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">Home Data</h1>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                     <p><button onclick="window.location.href='../home_csv'" class="btn btn-success">Export</button>
+                         Type:
+                        <select name="type" id = "type">
+                              <option value="blank"></option>
+                              <option value="Restaurant">Restaurant</option>
+                              <option value="Hospital">Hospital</option>
+                              <option value="Workplace">Workplace</option>
+                              <option value="Home">Home</option>
+                        </select>
+                         Day:
+                        <select name="day" id = "day">
+                              <option value="blank"></option>
+                              <option value="Monday">Monday</option>
+                              <option value="Tuesday">Tuesday</option>
+                              <option value="Wednesday">Wednesday</option>
+                              <option value="Thursday">Thursday</option>
+                              <option value="Friday">Friday</option>
+                              <option value="Saturday">Saturday</option>
+                              <option value="Sunday">Sunday</option>
+                        </select>
+                        Earliest Time:
+                        <input type="time" id = "starttime">
+                        Latest Time:
+                        <input type="time" id = "endtime">
+                        Earliest Date:
+                        <input type="date" id = "startdate">
+                        Latest Date:
+                        <input type="date" id = "enddate">
+                     </p>
+                     <p>
+                        Minimum Rating:
+                        <input type="number" id = "minrating" name="minrating">
+                        Maximum Rating:
+                        <input type="number" id = "maxrating" name="maxrating">
+                     </p>
+
+                    <div class="panel panel-default">
+
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <table width="100%" class="table table-striped table-bordered table-hover"  id ="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Day</th>
+                                    <th>City</th>
+                                    <th>Rating</th>
+                                    <th>Type</th>
+                                    <th>Q1</th>
+                                    <th>Q2</th>
+                                    <th>Q3</th>
+                                    <th>Q4</th>
+                                    <th>Q5</th>
+                                    <th>Q6</th>
+                                    <th>Q7</th>
+                                    <th>Q8</th>
+                                    <th>Q9</th>
+                                    <th>Q10</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {% for item in table %}
+                            
+                                <tr>
+                                    <td>{{ item.date }}</td>
+                                    <td>{{ item.time }}</td>
+                                    <td>{{ item.day }}</td>
+                                    <td>{{ item.city }}</td>
+                                    <td>{{ item.rating }}</td>
+                                    <td>{{ item.type }}</td>
+                                    <td>{{ item.answer1 }}</td>
+                                    <td>{{ item.answer2 }}</td>
+                                    <td>{{ item.answer3 }}</td>
+                                    <td>{{ item.answer4 }}</td>
+                                    <td>{{ item.answer5 }}</td>
+                                    <td>{{ item.answer6 }}</td>
+                                    <td>{{ item.answer7 }}</td>
+                                    <td>{{ item.answer8 }}</td>
+                                    <td>{{ item.answer9 }}</td>
+                                    <td>{{ item.answer10 }}</td>
+                                </tr>
+                            
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                           
+
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script type = "text/javascript" src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type = "text/javascript" src="{% static 'vendor/bootstrap/js/bootstrap.min.js' %}"></script>
+
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script type = "text/javascript" src="{% static 'vendor/metisMenu/metisMenu.min.js' %}"></script>
+
+    <!-- DataTables JavaScript -->
+    <script type = "text/javascript" src="{% static 'vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'vendor/datatables-plugins/dataTables.bootstrap.min.js' %}"></script>
+    <script type = "text/javascript" src="{% static 'vendor/datatables-responsive/dataTables.responsive.js' %}"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script type = "text/javascript" src="{% static 'dist/js/sb-admin-2.js' %}"></script>
+
+
+
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $.fn.dataTable.ext.search.push(
+        function( settings, data, dataIndex ) {
+            var min = parseInt( $('#minrating').val(), 10 );
+            var max = parseInt( $('#maxrating').val(), 10 );
+            var chosen_type = $('#type').val();
+            var chosen_day = $('#day').val();
+            var rating = parseFloat( data[4] );
+            var type = data[5];
+            var day = data[2];
+            var chosen_starttime = $('#starttime').val();
+            var chosen_endtime = $('#endtime').val();
+            var time = data[1];
+            if ((time.split(":"))[0] < 10 &&(time.split(":"))[0].length == 1){
+                time = "0" + time;
+            }
+
+            var chosen_startdate = new Date($('#startdate').val());
+            var chosen_enddate = new Date($('#enddate').val());
+            var offset = chosen_startdate.getTimezoneOffset()*60000;
+            chosen_startdate = new Date(chosen_startdate.getTime() + offset);
+            chosen_enddate = new Date(chosen_enddate.getTime() + offset);
+            var date = new Date(data[0]);
+
+
+
+            if ( (( isNaN( min ) && isNaN( max ) ) ||
+                 ( isNaN( min ) && rating <= max ) ||
+                 ( min <= rating   && isNaN( max ) ) ||
+                 ( min <= rating   && rating <= max ))&&
+                 ((chosen_starttime == "" && chosen_endtime == ""  ) ||
+                 ( chosen_starttime == "" && time <= chosen_endtime ) ||
+                 ( chosen_starttime <= time   && chosen_endtime == "" ) ||
+                 ( chosen_starttime <= time   && time <= chosen_endtime ))&&
+                 ((isNaN(chosen_startdate) && isNaN(chosen_enddate)  ) ||
+                 ( isNaN(chosen_startdate) && date <= chosen_enddate ) ||
+                 ( chosen_startdate <= date   && isNaN(chosen_enddate) ) ||
+                 ( chosen_startdate <= date   && date <= chosen_enddate )) &&
+                  (chosen_type == "blank" || type == chosen_type)&&
+                  (chosen_day == "blank" || day == chosen_day))
+            {
+                return true;
+            }
+            return false;
+        }
+    );
+
+        $(document).ready(function(){
+         var table = $('#dataTables-example').DataTable({
+            "scrollX": true,
+            drawCallback: function () { // this gets rid of duplicate headers
+                  $('.dataTables_scrollBody thead tr').css({ visibility: 'collapse' });
+                  $('.dataTables_scrollBody thead tr th').css({ fontSize: 0 });
+            }
+        });
+
+        $('#minrating, #maxrating, #starttime, #endtime, #startdate, #enddate').keyup( function() {
+            table.draw();
+        } );
+        $('#type, #day').bind('input', function() {
+            table.draw();
+        });
+    });
+
+    </script>
+
+</body>
+
+</html>
